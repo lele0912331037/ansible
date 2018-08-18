@@ -1,0 +1,6 @@
+---
+# --- 检测服务 ---
+- name: 服务管理
+  # when: {{ app_tpye}} == "restart"
+  shell: cd {{ app_dir }} && sh {{ app_scripts }} {{ app_tpye }}
+  tags: scripts

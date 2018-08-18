@@ -1,0 +1,10 @@
+---
+## ------ 更新文件 ------ 
+- name: 更新文件到服务器 #是否可以使用变量：更新文件到"{{ host_name }}" 
+  copy: src={{ app_tar_dir }} dest={{ app_upflie }} mode=0755
+  tags: scripts
+
+- name: 解压tar包
+  unarchive: src={{ app_upflie }}/app_name.tar.gz dest={{ app_src }}/{{ app_name }}/{{ app_tag }} \
+  copy=no grop={{ app_user }} owner={{ app_user }}
+  tags: scripts

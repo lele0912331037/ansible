@@ -1,0 +1,4 @@
+# --- 检测服务 ---
+- name: 服务管理
+  shell: "ps -ef|grep {{ app_name }}"
+  tags: scripts

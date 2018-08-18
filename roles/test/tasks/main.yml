@@ -1,0 +1,15 @@
+---
+# 创建相关目录
+- include: create.yaml
+
+# 上传文件
+#- include: upload.yml
+
+# 更新软连接
+#- include: update.yml
+
+# 重启服务
+#- include: manage.yml
+
+# 检测服务
+#- include: services.yml

@@ -1,0 +1,13 @@
+# 服务器属主属组
+app_user: robot
+app_group: robot
+
+# 服务名称，路径及软连接路径
+app_name: test
+app_dir: /data/app
+app_src: /data/src_app
+app_upflie: /data/upfile
+
+# tar包路径及名称
+app_tar_dir: /data/jenkins/workspace/test.tar.gz
+app_tag: $tag
