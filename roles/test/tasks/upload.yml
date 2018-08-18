@@ -1,9 +1,13 @@
 ---
 ## ------ 更新文件 ------ 
 - name: 更新文件到服务器 #是否可以使用变量：更新文件到"{{ host_name }}" 
-  copy: src={{ app_tar_dir }}/{{ app_tarname }} dest={{ app_upflie }} mode=0755
-  tags: scripts
+  copy: src={{ app_tar_dir }}/{{ app_tarname }}.tat.gz dest={{ app_upflie }} mode=0755
+  tags: upload
 
 - name: 解压tar包
-  unarchive: src={{ app_upflie }}/{{ app_tarname }} dest={{ app_src }}/{{ app_name }}/{{ app_tag }} copy=no group={{ app_user }} owner={{ app_user }}
-  tags: scripts
+  unarchive: src={{ app_upflie }}/{{ app_tarname }}。tar.gz dest={{ app_src }}/{{ app_name }} copy=no group={{ app_user }} owner={{ app_user }}
+  tags: upload
+
+- name: mv目录为tag名称
+  shell: mv -rf {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ app_tarname }} mode=755
+  tags: upload

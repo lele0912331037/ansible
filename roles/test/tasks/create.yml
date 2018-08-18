@@ -4,5 +4,5 @@
   file: name={{ item }} state=directory owner={{ app_user }} group={{ app_group }}
   with_items: 
   - "{{ app_dir }}"
-  - "{{ app_src }}/{{ app_name }}/{{ app_tag }}"
+  - "{{ app_src }}/{{ app_name }}"
   - "{{ app_upflie }}"
