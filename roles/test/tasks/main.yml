@@ -1,17 +1,17 @@
 ---
 # 创建相关目录
-#- include: create.yml
+- include: create.yml
 
 # 上传文件
-#- include: upload.yml
+- include: upload.yml
 
 # 更新软连接
-#- include: update.yml
+- include: update.yml
 
-# 重启服务
+# 重启服务 when判断不好使
 - include: services.yml
-  when: app_mana
+#  when: app_mana
 
 # 检测服务
 - include: check.yml
-  when: app_service
+#  when: app_service

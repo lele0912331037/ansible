@@ -1,4 +1,4 @@
-# 服务器属主属组
+# 服务属主属组
 app_user: robot
 app_group: robot
 
@@ -11,7 +11,9 @@ app_upflie: /data/upfile
 # tar包路径及名称
 app_tarname: name # tar包的名称，不带.tar.gz
 app_tar_dir: /data/jenkins/workspace
-app_tag: tag_name # tag名称
+tag_id: tag_name # tag名称
 build_id: BuildId
+
+# include 模板判断条件
 app_mana: True
 app_service: True
