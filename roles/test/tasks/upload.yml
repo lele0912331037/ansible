@@ -9,5 +9,5 @@
   tags: upload
 
 - name: mv目录为tag名称
-  shell: mv -rf {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ app_tag }} mode=755
+  shell: mv -f {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ app_tag }} mode=755
   tags: upload
