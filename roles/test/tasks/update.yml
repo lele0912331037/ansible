@@ -1,5 +1,4 @@
 ---
 - name: 更新软连接
-  file: src={{ app_src }}/{{ app_name }}/{{ app_tag }} dest={{ app_dir }}/{{ app_name }} \
-  grop={{ app_user }} owner={{ app_user }} state=link force=yes
+  file: src={{ app_src }}/{{ app_name }}/{{ app_tag }} dest={{ app_dir }}/{{ app_name }} group={{ app_user }} owner={{ app_user }} state=link force=yes
   tags: scripts
