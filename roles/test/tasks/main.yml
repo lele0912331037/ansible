@@ -9,8 +9,9 @@
 - include: update.yml
 
 # 重启服务
-- include: manage.yml
-#  when: 
+- include: services.yml
+  when: {{ app_mana }} == "true"
 
 # 检测服务
-- include: services.yml
+- include: check.yml
+  when: {{ app_service }} == "true"
