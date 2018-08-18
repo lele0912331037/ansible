@@ -14,4 +14,4 @@
 
 # 检测服务
 - include: check.yml
-  when: {{ app_service }} == "true"
+  when: "{{ app_service }} == true"
