@@ -1,6 +1,6 @@
 ---
 # 创建相关目录
-- include: create.yaml
+- include: create.yml
 
 # 上传文件
 - include: upload.yml

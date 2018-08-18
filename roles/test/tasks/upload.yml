@@ -5,6 +5,5 @@
   tags: scripts
 
 - name: 解压tar包
-  unarchive: src={{ app_upflie }}/{{ app_tarname }} dest={{ app_src }}/{{ app_name }}/{{ app_tag }} \
-  copy=no grop={{ app_user }} owner={{ app_user }}
+  unarchive: src={{ app_upflie }}/{{ app_tarname }} dest={{ app_src }}/{{ app_name }}/{{ app_tag }} copy=no group={{ app_user }} owner={{ app_user }}
   tags: scripts
