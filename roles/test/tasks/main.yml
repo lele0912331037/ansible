@@ -10,8 +10,8 @@
 
 # 重启服务
 - include: services.yml
-  when: "{{ app_mana }} == true"
+  when: {{ app_mana }} == 'true'
 
 # 检测服务
 - include: check.yml
-  when: "{{ app_service }} == true"
+  when: {{ app_service }} == 'true'
