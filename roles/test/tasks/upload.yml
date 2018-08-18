@@ -8,7 +8,7 @@
   tags: upload
 
 - name: 判断是否有此tag目录
-  shell: [ -d {{ app_src }}/{{ app_name }}/{{ app_tag }} ] && echo true || echo false
+  shell: [ -d "{{ app_src }}/{{ app_name }}/{{ app_tag }}" ] && echo true || echo false
   register: result
 
 - name: mv目录不为tag名称
