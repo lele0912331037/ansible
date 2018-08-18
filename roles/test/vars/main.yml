@@ -9,5 +9,6 @@ app_src: /data/src_app
 app_upflie: /data/upfile
 
 # tar包路径及名称
-app_tar_dir: /data/jenkins/workspace/test.tar.gz
-app_tag: $tag
+# app_tarname: {{  }}
+app_tar_dir: /data/jenkins/workspace
+# app_tag: {{ tar_id }}
