@@ -1,4 +1,4 @@
 ---
 - hosts: test
   roles:
-  - tomcat_status
+  - app_update

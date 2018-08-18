@@ -1,4 +1,4 @@
 ---
 - hosts: jump
   roles:
-  - app_update
+  - test
