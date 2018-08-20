@@ -17,3 +17,4 @@ build_id: BuildId
 # include 模板判断条件
 app_mana: True
 app_service: True
+pid_name: zabbix_agentd.conf
