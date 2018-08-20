@@ -9,7 +9,7 @@
 
 - name: 根据pid查端口
   when: result.stdout != None
-  shell: "ss -lnp|grep {{ result.stdout }}|awk 'NR=='1' {print $5}'|awk -F':' '{print $2}' && echo {{ result.stdout }} "
+  shell: "ss -lnp|grep {{ result.stdout }}|awk 'NR=='1' {print $5}'|awk -F':' '{print $2}'"
   tags: check
 - name: debug
   debug: var=result.stdout verbosity=0
