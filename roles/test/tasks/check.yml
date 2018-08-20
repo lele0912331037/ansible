@@ -4,6 +4,7 @@
   shell: "ps -ef|grep {{ pid_name }}|grep -v grep |awk '{print $2}'"
   register: result
   tags: check
+
 - name: 输出pid号
   debug: var=result.stdout verbosity=0
 
