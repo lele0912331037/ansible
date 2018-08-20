@@ -1,7 +1,7 @@
 ---
 # --- 检测服务 ---
 - name: 根据进程名称检查pid
-  shell: "ps -ef|grep {{ pid_name }}||grep -v grep |awk '{print $2}'"
+  shell: "echo $(ps -ef|grep {{ pid_name }}||grep -v grep |awk '{print $2}') "
   #register: result
   tags: check
 
