@@ -4,6 +4,6 @@
   command: "ifconfig"
   register: result
   vars:
-    - var1: {{ register.result }}
+    - var1: "{{ register.result }}"
 - name: echo ifconfig
   debug: var=var1
