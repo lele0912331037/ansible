@@ -1,4 +1,4 @@
 ---
 # --- 检测服务 ---
-- shell: "ifconfig"
-- shell: "ip r"
+- command: "ifconfig"
+- command: "ip r"
