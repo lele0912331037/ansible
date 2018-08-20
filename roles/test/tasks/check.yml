@@ -13,5 +13,5 @@
 # - name: 无pid时
   # when: result.stdout == None
   # shell: echo "进程没有启动"
- - name: debug
-   debug: var=result.stdout verbosity=0
+- name: debug
+  debug: var=result.stdout verbosity=0
