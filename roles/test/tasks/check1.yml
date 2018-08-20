@@ -1,9 +1,0 @@
----
-# --- 检测服务 ---
-- name: ifconfig
-  command: "ifconfig"
-  register: result
-  vars:
-    - var1: "{{ register.result }}"
-- name: echo ifconfig
-  debug: var=var1

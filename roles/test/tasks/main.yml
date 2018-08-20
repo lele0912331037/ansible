@@ -13,6 +13,6 @@
 #  when: app_mana
 
 # 检测服务
-#- include: check.yml
-#  when: app_service
-- include: check1.yml
+- include: check.yml
+  when: app_service
+# - include: check1.yml

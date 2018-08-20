@@ -19,3 +19,5 @@
 - name: 无pid时
   when: result.stdout == None
   shell: echo "进程没有启动"
+  register: result
+  debug: var=result.stdout
