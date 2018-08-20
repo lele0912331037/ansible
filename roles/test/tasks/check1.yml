@@ -1,4 +1,3 @@
 ---
 # --- 检测服务 ---
-- name: 根据进程名称检查pid
-  shell: "ifconfig"
+- shell: "ifconfig"
