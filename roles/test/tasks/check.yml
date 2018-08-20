@@ -3,20 +3,18 @@
 - name: 根据进程名称检查pid
   shell: "ps -ef|grep {{ pid_name }}|grep -v grep |awk '{print $2}'"
   register: result
-  vars: 
-  - pids=register.result
-#  tags: check
-#- name: 输出pid号
-#  debug: var=result.stdout verbosity=0
-#
-#- name: 根据pid查端口
-#  when: result.stdout != None
-#  shell: "ss -lnp|grep {{ result.stdout }}|awk 'NR=='1' {print $5}'|awk -F':' '{print $2}'"
-#  register: result
-#  tags: check
-#- name: 输出port号
-#  debug: var=result.stdout verbosity=0
-#
-#- name: 无pid时
-#  when: result.stdout == None
-#  shell: echo "进程没有启动"
+  tags: check
+- name: 输出pid号
+  debug: var=result.stdout verbosity=0
+
+- name: 根据pid查端口
+  when: result.stdout != None
+  shell: "ss -lnp|grep {{ result.stdout }}|awk 'NR=='1' {print $5}'|awk -F':' '{print $2}'"
+  register: result
+  tags: check
+- name: 输出port号
+  debug: var1=result.stdout  var
+
+- name: 无pid时
+  when: result.stdout == None
+  shell: echo "进程没有启动"
