@@ -14,7 +14,7 @@
   register: result
   tags: check
 - name: 输出port号
-  debug: var1=result.stdout  var
+  debug: var
 
 - name: 无pid时
   when: result.stdout == None
