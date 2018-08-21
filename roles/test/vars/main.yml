@@ -15,6 +15,6 @@ tag_id: tag_name # tag名称
 build_id: BuildId
 
 # include 模板判断条件
-app_service: Fales
+app_service: False
 app_check: False
 pid_name: zabbix_agentd.conf
