@@ -10,7 +10,7 @@
 
 # 重启服务
 - include: services.yml
-  when: app_mana
+  when: app_check
 
 # 检测服务
 - include: check.yml
