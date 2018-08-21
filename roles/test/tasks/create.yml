@@ -1,6 +1,6 @@
 ---
 ## ------ 建立相关服务目录 ------
-- name: 创建目录
+- name: 创建目录{{ item }}
   file: name={{ item }} state=directory owner={{ app_user }} group={{ app_group }}
   with_items: 
   - "{{ app_dir }}"

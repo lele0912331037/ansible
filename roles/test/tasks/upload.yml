@@ -1,10 +1,11 @@
 ---
 ## ------ 更新文件 ------ 
-- name: 更新文件到服务器 #是否可以使用变量：更新文件到"{{ host_name }}" 
+- name: 更新文件到服务器
   copy: src={{ app_tar_dir }}/{{ app_tarname }}.tar.gz dest={{ app_upflie }} mode=0755
 
 - name: 解压tar包
-  unarchive: src={{ app_upflie }}/{{ app_tarname }}.tar.gz dest={{ app_src }}/{{ app_name }} copy=no group={{ app_user }} owner={{ app_user }}
+  unarchive: src={{ app_upflie }}/{{ app_tarname }}.tar.gz dest={{ app_src }}/{{ app_name }}
+               copy=no group={{ app_user }} owner={{ app_user }}
   tags: upload
 
 - name: 判断是否有此tag目录
@@ -17,4 +18,5 @@
 
 - name: mv目录为tag名称
   when: result.stdout
-  shell: "mv -f {{ app_src }}/{{ app_name }}/{{ tag_id }} {{ app_src }}/{{ app_name }}/{{ tag_id }}_{{ build_id }} && mv {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ app_tag }}"
+  shell: mv -f {{ app_src }}/{{ app_name }}/{{ tag_id }} {{ app_src }}/{{ app_name }}/{{ tag_id }}_{{ build_id }}
+           && mv {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ app_tag }}
