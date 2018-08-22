@@ -11,8 +11,8 @@ app_upflie: /data/upfile
 
 # 服务启停
 scripts_path: path
-scripts_start: start.sh
-scripts_stop: stop.sh
+scripts_start: None
+scripts_stop: None
 scripts_service: service.sh
 app_type: None
 
