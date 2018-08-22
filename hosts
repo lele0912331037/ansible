@@ -23,3 +23,7 @@
 # aws跳板机
 [jump]
 172.31.28.143
+
+[tx_nlu]
+172.16.0.12 ansible_ssh_user=root
+172.16.0.24 ansible_ssh_user=root

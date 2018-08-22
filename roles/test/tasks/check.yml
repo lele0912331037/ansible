@@ -32,4 +32,8 @@
   register: result
 
 - name: 无pid时输出
+<<<<<<< HEAD
   debug: var=result.stdout
+=======
+  debug: var=result.stdout
+>>>>>>> master
