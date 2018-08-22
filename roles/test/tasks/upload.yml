@@ -10,7 +10,8 @@
 
 - name: 判断是否有此tag目录
   shell: "[ -d {{ app_src }}/{{ app_name }}/{{ tag_id }} ] && echo True || echo False"
-  register: result
+  register: result.stdout
+- debug: var=result.stdout
 
 - name: mv目录不为tag名称
   when: not result.stdout
