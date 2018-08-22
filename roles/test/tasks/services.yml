@@ -1,6 +1,18 @@
 ---
 # --- 检测服务 ---
-- name: 服务管理
-  # when: {{ app_tpye}} == "restart"
-  shell: cd {{ app_dir }} && sh {{ app_scripts }} {{ app_tpye }}
+- name: 服务启停
+  when: app_tpye != None
+  shell: cd {{ app_dir }}/{{ app_name }} && sh {{ scripts_service }} {{ app_tpye }}
+  register: result
   tags: scripts
+
+- name: 服务启停，使用不同启停脚本，启动
+  when: scripts_start != None
+  shell: cd {{ app_dir }}/{{ app_name }} && sh {{ scripts_start }}
+
+- name: 服务启停，使用不同启停脚本，停止
+  when: scripts_start != None
+  shell: cd {{ app_dir }}/{{ app_name }} && sh {{ scripts_stop }}
+
+- name: 检查启停脚本结果
+  debug: var=result.stdout

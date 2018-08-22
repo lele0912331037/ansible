@@ -9,6 +9,12 @@ app_dir: /data/app
 app_src: /data/src_app
 app_upflie: /data/upfile
 
+# 服务启停
+scripts_start: start.sh
+scripts_stop: stop.sh
+scripts_service: service.sh
+app_type: ''
+
 # tar包路径及名称
 app_tarname: name # tar包的名称，不带.tar.gz
 app_tar_dir: /data/jenkins/workspace
