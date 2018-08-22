@@ -1,4 +1,4 @@
 ---
-- hosts: jump
+- hosts: {{ host_ip }}
   roles:
   - test
