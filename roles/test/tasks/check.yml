@@ -24,4 +24,3 @@
 
 - name: 无pid时输出
   debug: var=result.stdout
-  when: result.stdout != None
