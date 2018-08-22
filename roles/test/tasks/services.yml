@@ -1,17 +1,17 @@
 ---
 # --- 检测服务 ---
 - name: 服务启停
-  when: app_tpye != None
+  when: app_tpye is defined
   shell: cd {{ app_dir }}/{{ app_name }} && sh {{ scripts_service }} {{ app_tpye }}
   register: result
   tags: scripts
 
 - name: 服务启停，使用不同启停脚本，启动
-  when: scripts_start != None
+  when: scripts_start is defined
   shell: cd {{ app_dir }}/{{ app_name }} && sh {{ scripts_start }}
 
 - name: 服务启停，使用不同启停脚本，停止
-  when: scripts_start != None
+  when: scripts_start is defined
   shell: cd {{ app_dir }}/{{ app_name }} && sh {{ scripts_stop }}
 
 - name: 检查启停脚本结果
