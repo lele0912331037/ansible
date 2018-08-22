@@ -10,6 +10,7 @@ app_src: /data/src_app
 app_upflie: /data/upfile
 
 # 服务启停
+scripts_path: path
 scripts_start: start.sh
 scripts_stop: stop.sh
 scripts_service: service.sh
