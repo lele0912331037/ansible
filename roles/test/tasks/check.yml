@@ -10,18 +10,18 @@
 
 - name: 根据pid查端口，系统版本为centos6*的
   when: result.stdout != None
-  shell: "ss -lnp|grep {{ result.stdout }}|awk 'NR==1 {print $4}'|awk -F':' '{print $2}'"
+  shell: "ss -lnp|grep {{ result.stdout }}|awk '{print $5}'|awk -F':' '{print $2}'"
   register: result
   tags: check
 
 - name: 输出port号，系统版本为centos6*的
   debug: var=result.stdout
 
-- name: 根据pid查端口，系统版本为centos7*的
-  when: result.stdout != None
-  shell: "ss -lnp|grep {{ result.stdout }}|awk 'NR==1 {print $5}'|awk -F':' '{print $2}'"
-  register: result
-  tags: check
+#- name: 根据pid查端口，系统版本为centos7*的
+#  when: result.stdout != None
+#  shell: "ss -lnp|grep {{ result.stdout }}|awk 'NR==1 {print $5}'|awk -F':' '{print $2}'"
+#  register: result
+#  tags: check
 
 - name: 输出port号，系统版本为centos7*的
   debug: var=result.stdout
