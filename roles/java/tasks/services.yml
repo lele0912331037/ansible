@@ -1,7 +1,7 @@
 ---
 # --- 检测服务 ---
 - name: 服务启停
-  when: app_tpye is defined
+  when: app_type is defined
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_service }} {{ app_tpye }}'"
   register: result
   tags: scripts
