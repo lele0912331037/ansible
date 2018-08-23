@@ -1,4 +1,4 @@
 ---
-- hosts: host_ip
+- hosts: '{{ host_ip }}'
   roles:
   - java
