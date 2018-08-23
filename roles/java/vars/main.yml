@@ -11,10 +11,10 @@ app_upflie: /data/upfile
 
 # 服务启停
 scripts_path: '{{ app_dir }}/{{ app_name }}'
-scripts_start: None
-scripts_stop: None
+#scripts_start: None
+#scripts_stop: None
 scripts_service: service.sh
-app_type: None
+#app_type: None
 
 # tar包路径及名称
 app_tarname: name # tar包的名称，不带.tar.gz
