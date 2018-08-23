@@ -8,7 +8,7 @@
 - debug: var=result.stdout
 
 - name: 服务启停，停止
-  when: scripts_stop != None
+  when: '{{ scripts_stop }}' != None
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_stop }}'"
 
 - name: 服务启停，启动
