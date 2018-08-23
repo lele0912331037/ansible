@@ -10,7 +10,7 @@ app_src: /data/src_app
 app_upflie: /data/upfile
 
 # 服务启停
-scripts_path: path
+scripts_path: '{{ app_dir }}/{{ app_name }}'
 scripts_start: None
 scripts_stop: None
 scripts_service: service.sh
