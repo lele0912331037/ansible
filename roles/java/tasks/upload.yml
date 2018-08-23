@@ -1,0 +1,23 @@
+---
+## ------ 更新文件 ------ 
+- name: 更新文件到服务器
+  copy: src={{ app_tar_dir }}/{{ app_tarname }}.zip dest={{ app_upflie }} mode=0755
+
+- name: 解压zip包
+  unarchive: src={{ app_upflie }}/{{ app_tarname }}.zip dest={{ app_src }}/{{ app_name }}
+               copy=no group={{ app_user }} owner={{ app_user }}
+  tags: upload
+
+- name: 判断是否有此tag目录
+  shell: "[ -d {{ app_src }}/{{ app_name }}/{{ tag_id }} ] && echo 'True' || echo 'False'"
+  register: result
+- debug: var=result.stdout
+
+- name: mv目录不为tag名称
+  when: result.stdout == 'False'
+  shell: mv -f {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ tag_id }}
+
+- name: mv目录为tag名称
+  when: result.stdout == 'True'
+  shell: mv -f {{ app_src }}/{{ app_name }}/{{ tag_id }} {{ app_src }}/{{ app_name }}/{{ tag_id }}_{{ build_id }}
+           && mv {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ tag_id }}
