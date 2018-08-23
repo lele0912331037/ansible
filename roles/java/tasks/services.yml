@@ -8,11 +8,11 @@
 - debug: var=result.stdout
 
 - name: 服务启停，停止
-  when: scripts_stop is defined
+  when: scripts_stop != None
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_stop }}'"
 
 - name: 服务启停，启动
-  when: scripts_start is defined
+  when: scripts_start != None
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_start }}'"
 
 - name: 检查启停脚本结果
