@@ -2,7 +2,7 @@
 # --- 检测服务 ---
 - name: 服务启停
   when: app_type is defined
-  shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_service }} {{ app_tpye }}'"
+  shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_service }} {{ app_type }}'"
   register: result
   tags: scripts
 - debug: var=result.stdout
