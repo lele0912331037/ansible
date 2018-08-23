@@ -12,7 +12,7 @@
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_stop }}'"
 
 - name: 服务启停，启动
-  when: scripts_start != None
+  when: scripts_start is undefined
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_start }}'"
 
 - name: 检查启停脚本结果
