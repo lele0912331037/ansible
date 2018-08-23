@@ -5,6 +5,7 @@
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_service }} {{ app_tpye }}'"
   register: result
   tags: scripts
+- debug: var=result.stdout
 
 - name: 服务启停，停止
   when: scripts_stop is defined
