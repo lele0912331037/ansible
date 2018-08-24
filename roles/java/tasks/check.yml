@@ -7,7 +7,7 @@
   tags: check
 
 - name: 输出pid号
-  when: result.stdout is defined
+  when: a is defined
   debug: var=result.stdout verbosity=0
 
 - name: 根据pid查端口，系统版本为centos6*的
