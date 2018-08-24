@@ -33,4 +33,5 @@
   register: result
 
 - name: 无pid时输出
+  when: result.stdout is defined
   debug: var=result.stdout
