@@ -1,7 +1,8 @@
 check process {{ app_name }} matching "{{ pid_name }}"
 	group {{ app_name }}
 {% if scripts_start %}
-	start program = "cd {{ scripts_path }} && /bin/sh {{ scripts_start }}'" as uid "{{ app_user }}"
-{% elif scripts_stop %}
-	stop program = "cd {{ scripts_path }} && /bin/sh {{ scripts_stop }}'" as uid "{{ app_user }}"
+	start program = "cd {{ scripts_path }} && /bin/sh {{ scripts_start }}" as uid "{{ app_user }}"
+{% endif %}
+{% if scripts_stop %}
+	stop program = "cd {{ scripts_path }} && /bin/sh {{ scripts_stop }}" as uid "{{ app_user }}"
 {% endif %}

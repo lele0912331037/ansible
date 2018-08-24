@@ -6,4 +6,4 @@
   file: dest=/etc/monit.d state=directory
 
 - name: template transfor java dir
-  template: src=monit.j2 dest=/etc/monit.d/'{{ app_name }}'.conf
+  template: src=monit.j2 dest=/etc/monit.d/{{ app_name }}.conf
