@@ -9,7 +9,7 @@
 
 - name: 输出pid号
   when: a is defined
-  debug: var=result.stdout verbosity=0
+  debug: var=a
 
 - name: 根据pid查端口，系统版本为centos6*的
   when: result.stdout is defined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "6"
