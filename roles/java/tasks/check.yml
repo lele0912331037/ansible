@@ -8,7 +8,7 @@
   tags: check
 
 - name: 输出pid号
-  when: a is defined
+  #when: a is defined
   debug: var=a
 
 - name: 根据pid查端口，系统版本为centos6*的
