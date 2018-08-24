@@ -2,40 +2,38 @@
 # --- 检测服务 ---
 - name: 根据进程名称检查pid
   shell: "ps -ef|grep {{ pid_name }}|grep -v grep |awk '{if($3==1) print $2}'"
-  register: result
-  vars: 
-    a: '{{ result.stdout }}'
+  register: pidname
   tags: check
 
 - name: 输出pid号
-  #when: a is defined
-  debug: var=a
+  when: pidname is defined
+  debug: var=pidname.stdout
 
 - name: 根据pid查端口，系统版本为centos6*的
-  when: result.stdout is defined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "6"
+  when: pidname.stdout is defined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "6"
   shell: "sleep 5 ; ss -lnp|grep '{{ result.stdout }}'|awk '{print $4}'"
-  register: result
+  register: c6port
   tags: check
 
 - name: 输出端口号，系统版本为centos6*的
-  when: result.stdout is defined
-  debug: var=result.stdout
+  when: c6port.stdout is defined
+  debug: var=c6port.stdout
 
 - name: 根据pid查端口，系统版本为centos7*的
-  when: result.stdout is defined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "7"
+  when: pidname.stdout is defined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "7"
   shell: "sleep 5 ; ss -lnp|grep {{ result.stdout }}|awk '{print $5}'"
-  register: result
+  register: c7port
   tags: check
 
 - name: 输出端口号，系统版本为centos7*的
-  when: result.stdout is defined
-  debug: var=result.stdout
+  when: c7port.stdout is defined
+  debug: var=c7port.stdout
 
 - name: 无pid时
-  when: result.stdout is undefined
+  when: pidname.stdout is undefined
   shell: echo "进程没有启动"
-  register: result
+  register: nopid
 
 - name: 无pid时输出
-  when: result.stdout is defined
-  debug: var=result.stdout
+  when: nopid.stdout is defined
+  debug: var=nopid.stdout
