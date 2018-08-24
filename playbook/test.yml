@@ -1,4 +1,4 @@
 ---
-- hosts: tx_nlu
+- hosts: '{{ host_ip }} '
   roles:
   - test
