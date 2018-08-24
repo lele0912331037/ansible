@@ -1,0 +1,6 @@
+---
+- name: 更新软连接
+  file: src={{ scripts_path }}/{{ src_conf }} dest={{ scripts_path }}/conf group={{ app_user }} owner={{ app_user }} state=link force=yes
+  tags: scripts
+  register: result.output
+- debug: var=result.stdout verbosity=0
