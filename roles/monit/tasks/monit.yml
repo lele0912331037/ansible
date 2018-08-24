@@ -3,7 +3,10 @@
 # 添加monit配置文件
 - name: 创建monit目录
   when: app_name is defined
-  file: dest=/etc/monit.d state=directory
+  file: dest={{ item }} state=directory
+  with_items: 
+  - /etc/monit.d
+  - /tmp/monit
 
 - name: template transfor java dir
   template: src=monit.j2 dest=/etc/monit.d/{{ app_name }}.conf
