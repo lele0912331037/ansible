@@ -8,6 +8,10 @@
 # 更新软连接
 - include: update.yml
 
+# 修改配置文件软连接
+- include: conf_link.yml
+  when: src_conf is defined 
+
 # 重启服务
 - include: services.yml
   when: app_service
@@ -15,7 +19,3 @@
 # 检测服务
 - include: check.yml
   when: app_check
-
-# 修改配置文件软连接
-- include: conf_link.yml
-  when: src_conf is defined 
