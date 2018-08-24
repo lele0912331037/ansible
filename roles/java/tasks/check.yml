@@ -3,6 +3,7 @@
 - name: 根据进程名称检查pid
   shell: "ps -ef|grep {{ pid_name }}|grep -v grep |awk '{if($3==1) print $2}'"
   register: result
+  var: a=result.stdout
   tags: check
 
 - name: 输出pid号
@@ -20,12 +21,12 @@
   debug: var=result.stdout
 
 - name: 根据pid查端口，系统版本为centos7*的
-  when: result.stdout is undefined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "7"
+  when: result.stdout is defined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "7"
   shell: "sleep 5 ; ss -lnp|grep {{ result.stdout }}|awk '{print $5}'"
   register: result
   tags: check
 
-- name: 输出port号，系统版本为centos7*的
+- name: 输出端口号，系统版本为centos7*的
   when: result.stdout is defined
   debug: var=result.stdout
 
