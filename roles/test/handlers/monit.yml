@@ -13,3 +13,7 @@
   notify: reload monit
 - name: reload monit
   shell: monit reload
+  notify: monit {{ app_name }} status
+
+- name: monit {{ app_name }} status
+  shell: monit {{ app_name }} status
