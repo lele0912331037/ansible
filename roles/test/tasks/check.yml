@@ -1,9 +1,13 @@
 ---
 # --- 检测服务 ---
 - name: 根据进程名称检查pid
+  when: pid_name is defined
   shell: "ps -ef|grep {{ pid_name }}|grep -v grep |awk '{if($3==1) print $2}'"
   register: pidname
   tags: check
+  notify: 
+    - mkdir monit path
+    - update monit conf
 
 - name: 输出pid号
   when: pidname is defined

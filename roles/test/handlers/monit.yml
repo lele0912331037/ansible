@@ -1,0 +1,12 @@
+---
+
+# 添加monit配置文件
+- name: mkdir monit path
+  when: app_name is defined
+  file: dest={{ item }} state=directory
+  with_items: 
+  - /etc/monit.d
+  - /var/log/monit
+
+- name: update monit conf
+  template: src=monit.j2 dest=/etc/monit.d/{{ app_name }}.conf

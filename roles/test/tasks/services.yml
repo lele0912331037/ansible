@@ -6,6 +6,7 @@
   register: result
   tags: scripts
 - debug: var=result.stdout
+  notify: update monit
 
 - name: 服务启停，停止
   when: scripts_stop is defined
