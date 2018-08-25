@@ -16,7 +16,7 @@
   notify: monit status
 
 - name: monit status
-  shell: " su - root -c 'monit status {{ app_name }}'"
+  shell: " su - root -c 'monit status {{ app_name }}|awk 'NR==4 {print $NF}''"
   notify: 查看monit状态
   register: status
 
