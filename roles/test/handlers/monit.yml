@@ -12,11 +12,11 @@
   template: src=monit.j2 dest=/etc/monit.d/{{ app_name }}.conf
   notify: reload monit
 - name: reload monit
-  shell: monit reload
+  shell: "su - root -c 'monit reload'"
   notify: monit status
 
 - name: monit status
-  shell: monit status {{ app_name }}
+  shell: " su - root -c 'monit status {{ app_name }}'"
   notify: 查看monit状态
   register: status
 
