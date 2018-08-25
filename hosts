@@ -1,3 +1,5 @@
+# aws服务器
+[aws]
 172.31.16.155
 172.31.24.33
 172.31.24.32
@@ -24,12 +26,19 @@
 [jump]
 172.31.28.143
 
+# 腾讯云服务器
 [tx_nlu]
 172.16.0.12 ansible_ssh_user=root
 172.16.0.24 ansible_ssh_user=root
 
+# 酒仙桥服务器
+[jxq_nlu_pre]
 10.102.4.33 ansible_ssh_user=root
 10.102.5.57 ansible_ssh_user=root
+
+[jxq_nlu_online]
 10.102.3.42 ansible_ssh_user=root
 10.102.3.50 ansible_ssh_user=root
+
+[jxq_nlu_test_pre]
 10.52.68.77 ansible_ssh_user=root
