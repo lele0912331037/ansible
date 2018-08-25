@@ -13,7 +13,11 @@
   notify: reload monit
 - name: reload monit
   shell: monit reload
-  notify: monit {{ app_name }} status
+  notify: monit status {{ app_name }}
 
-- name: monit {{ app_name }} status
-  shell: monit {{ app_name }} status
+- name: monit status app_name
+  shell: monit status {{ app_name }}
+  register: status
+
+- name: 查看monit状态
+  debug: vat=status.stdout
