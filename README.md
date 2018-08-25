@@ -1,9 +1,33 @@
 # 例：
 ansible-playbook playbook/test.yml --extra-vars "app_tar_dir=/srv/salt/ovs app_tarname=test12 app_tag=1.1.0 build_id=2.2.2 app_mana=Fales"
 
-# 判断java环境，需要安装jdk
+# 服务属主属组
+app_user: robot
+app_group: robot
+host_ip: jump
 
-ansible-playbook playbook/impala.yml --extra-vars 'host_ip=10.102.5.69 app_tar_dir=/data/jenkins/workspace/orion-test_api-impala-agent_5.69_5.70/target 	app_tarname=impala-rest-0.0.1-SNAPSHOT tag_id=v1.0.0 app_name=api-impala-agent     scripts_service=server.sh app_tpye=restart app_service=True build_id=19     app_check=True pid_name=impala-rest-0.0.1-SNAPSHOT'
+# 服务名称，路径及软连接路径
+app_name: test
+app_dir: /data/app
+app_src: /data/src_app
+app_upflie: /data/upfile
+
+# 服务启停
+scripts_path: '{{ app_dir }}/{{ app_name }}'
+#scripts_start: None
+#scripts_stop: None
+scripts_service: service.sh
+#app_type: None
+
+# tar包路径及名称
+app_tarname: name # tar包的名称，不带.tar.gz
+app_tar_dir: /data/jenkins/workspace
+tag_id: tag_name # tag名称
+build_id: BuildId
+
+# include 模板判断条件
+pid_name: zabbix_agentd.conf
+
 
 ansible-playbook playbook/test.yml --extra-vars "host_ip=172.16.0.12 app_tar_dir=/data/jenkins/workspace \
 	app_tarname=semantic-online_nebulae_3.42_3.50 tag_id=master app_name=nebulae scripts_start=start.sh \
