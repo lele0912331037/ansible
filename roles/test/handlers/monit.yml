@@ -15,7 +15,7 @@
   shell: monit reload
   notify: monit status {{ app_name }}
 
-- name: monit status '{{ app_name }}'
+- name: monit status {{ app_name }}
   shell: monit status {{ app_name }}
   register: status
 
