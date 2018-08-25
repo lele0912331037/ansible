@@ -17,6 +17,7 @@
 
 - name: monit status
   shell: monit status {{ app_name }}
+  notify: 查看monit状态
   register: status
 
 - name: 查看monit状态
