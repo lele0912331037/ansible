@@ -21,4 +21,4 @@
   register: status
 
 - name: 查看monit状态
-  debug: vat=status.stdout
+  debug: var=status.stdout
