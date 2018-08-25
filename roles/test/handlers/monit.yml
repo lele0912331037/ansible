@@ -10,3 +10,6 @@
 
 - name: update monit conf
   template: src=monit.j2 dest=/etc/monit.d/{{ app_name }}.conf
+  notify: reload monit
+- name: reload monit
+  shell: monit reload

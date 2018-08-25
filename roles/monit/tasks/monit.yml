@@ -10,3 +10,4 @@
 
 - name: template transfor java dir
   template: src=monit.j2 dest=/etc/monit.d/{{ app_name }}.conf
+  
