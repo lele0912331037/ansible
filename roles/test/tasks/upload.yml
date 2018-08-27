@@ -16,7 +16,7 @@
   when: tatpath.stat.isdir == false
   shell: mv -f {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ tag_id }}
 
-- name: mv目录为tag名称
+- name: 重命名为tag名称，并重命名原tag为tag_buildID
   when: tatpath.stat.isdir == true
   shell:
     - mv -f {{ app_src }}/{{ app_name }}/{{ tag_id }} {{ app_src }}/{{ app_name }}/{{ tag_id }}_{{ build_id }}
