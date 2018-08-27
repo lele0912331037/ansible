@@ -1,30 +1,8 @@
 ---
-- name: 获取monit配置
-  stat: path=/etc/monit.d/{{ app_name }}.conf
-  register: monit_conf
-
 - name: 更新软连接
   file: src={{ app_src }}/{{ app_name }}/{{ tag_id }} dest={{ app_dir }}/{{ app_name }} group={{ app_user }} owner={{ app_user }} state=link force=yes
   tags: scripts
-  when: scripts_stop is defined and monit_conf.stat.isreg == false
-  notify: 服务停止
-  when: scripts_start is defined and monit_conf.stat.isreg == false
-  notify: 服务启动
-  when: monit_conf.stat.isreg == true
-  notify: monit重启服务
-
-#- name: 获取monit配置
-#  stat: path=/etc/monit.d/{{ app_name }}.conf
-#  register: monit_conf
-#
-#- name: 服务停止
-#  when: scripts_stop is defined and monit_conf.stat.isreg == false
-#  notify: 服务停止
-#
-#- name: 服务启停
-#  when: scripts_start is defined and monit_conf.stat.isreg == false
-#  notify: 服务启动
-#
-#- name: monit重启服务
-#  when: monit_conf.stat.isreg == true
-#  notify: monit重启服务
+  notify: 
+    - monit重启服务
+    - 服务停止
+    - 服务启动

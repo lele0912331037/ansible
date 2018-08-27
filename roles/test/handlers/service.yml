@@ -1,10 +1,17 @@
 ---
+- name: 获取monit配置
+  stat: path=/etc/monit.d/{{ app_name }}.conf
+  register: monitConf
+
 - name: monit重启服务
+  when: monitConf.stat.isreg == true
   shell: "su - root -c 'monit restart {{ app_name }}'"
   notify: monit status
 
 - name: 服务停止
+  when: scripts_stop is defined and monitConf.stat.isreg == false
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_stop }}'"
 
 - name: 服务启停
+  when: scripts_start is defined and monitConf.stat.isreg == false
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_start }}'"
