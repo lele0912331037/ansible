@@ -4,4 +4,3 @@
     - name: test path
       shell: ls /etc/monit.d/nebulae.conf
       register: result
-    - debug: var= result.stdout
