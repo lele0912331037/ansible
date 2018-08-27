@@ -11,7 +11,7 @@
 
 - name: 服务停止
   when: scripts_stop is defined and monit_conf.stat.isreg == false
-  notify:
+  notify: 
     - 服务停止
 
 - name: 服务启停
