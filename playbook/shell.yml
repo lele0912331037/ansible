@@ -4,5 +4,4 @@
   - name: test path
     shell: ls /etc/monit.d/nebulae.conf
     register: result
-  - name: ss test
-    debug: var= result.stdout
+  - debug: var= result.stdout
