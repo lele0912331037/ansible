@@ -31,6 +31,10 @@
 172.16.0.12 ansible_ssh_user=root
 172.16.0.24 ansible_ssh_user=root
 
+[tx_nlu_bxm]
+172.16.0.130 ansible_ssh_user=root
+172.16.0.116 ansible_ssh_user=root
+
 # 酒仙桥服务器
 [jxq_nlu_pre]
 10.102.4.33 ansible_ssh_user=root

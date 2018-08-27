@@ -1,0 +1,16 @@
+---
+
+# 删除历史备份
+
+- name: 统计目录个数
+  shell: "ls {{ app_src }}/{{ app_name }}|wc -l"
+  register: count_NO
+
+- name: 删除历史目录
+  shell: "find {{ app_src }}/{{ app_name }}/* -maxdepth 0 -type d|xargs ls -tdr|head -{{ count_NO.output }}|xargs rm -rf"
+  register: delete_NO
+
+- name: 打印日志
+  debug: 
+    - var=count_NO.output
+    - var=delete_NO.output
