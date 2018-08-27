@@ -1,0 +1,5 @@
+---
+
+- name: 重启服务
+  shell: "su - root -c 'monit restart {{ app_name }}'"
+  notify: monit status

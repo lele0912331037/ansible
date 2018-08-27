@@ -1,13 +1,14 @@
 ---
 
-# 添加monit配置文件
+# 添加monit路径
 - name: mkdir monit path
   when: app_name is defined
   file: dest={{ item }} state=directory
   with_items: 
   - /etc/monit.d
-  - /var/log/monit
+  - /var/log/monitd
 
+# 创建monit配置文件
 - name: update monit conf
   template: src=monit.j2 dest=/etc/monit.d/{{ app_name }}.conf
   notify: reload monit
@@ -15,10 +16,11 @@
   shell: "su - root -c 'monit reload'"
   notify: monit status
 
+# 检查服务状态
 - name: monit status
   shell: " su - root -c 'monit status {{ app_name }}|grep status'"
-  notify: 查看monit状态
+  notify: 查看服务状态
   register: status
 
-- name: 查看monit状态
+- name: 查看服务状态
   debug: var=status.stdout
