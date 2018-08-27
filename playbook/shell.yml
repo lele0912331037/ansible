@@ -1,9 +1,8 @@
 ---
 - hosts: 172.16.0.12
   tasks:
-    - name: test path
-      shell: ls /etc/monit.d/nebulae.conf
-      register: result
-  tasks:
-    - name: test debug
-      debug: var=result.stdout
+  - name: test path
+    shell: ls /etc/monit.d/nebulae.conf
+    #register: result
+  - name: test debug
+    debug: var=result.stdout
