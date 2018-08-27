@@ -6,3 +6,9 @@
     - monit重启服务
     - 服务停止
     - 服务启动
+
+# 更改配置文件软连接
+- name: 更新软连接
+  when: src_conf is defined
+  file: src={{ scripts_path }}/{{ src_conf }} dest={{ scripts_path }}/conf group={{ app_user }} owner={{ app_user }} state=link force=yes
+  tags: scripts

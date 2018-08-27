@@ -8,9 +8,5 @@
 # 更新软连接及服务重启
 - include: update.yml
 
-# 修改配置文件软连接
-- include: conf_link.yml
-  when: src_conf is defined
-
 # 检测服务
 - include: check.yml

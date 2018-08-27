@@ -32,4 +32,4 @@ pid_name: zabbix_agentd.conf
 ansible-playbook playbook/test.yml --extra-vars "host_ip=172.16.0.12 app_tar_dir=/data/jenkins/workspace \
 	app_tarname=semantic-online_nebulae_3.42_3.50 tag_id=master app_name=nebulae scripts_start=start.sh \
 	scripts_stop=stop.sh scripts_path=/data/app/nebulae/services \
-	build_id=43 pid_name=nebulae_server.py src_conf=conf_test_txy"
+	build_id=123 pid_name=nebulae_server.py src_conf=conf_test_txy"
