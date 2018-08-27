@@ -1,7 +1,10 @@
 ---
 # --- 检测服务 ---
+- name: 获取monit配置
+  stat: path=/etc/monit.d/{{ app_name }}.conf
+  register: monit_conf
 - name: 服务启停
-  when: app_type is defined
+  when: app_type is defined and monit_conf.stat.isreg == false
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_service }} {{ app_type }}'"
   register: result
   tags: scripts
