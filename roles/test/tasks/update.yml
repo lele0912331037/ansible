@@ -11,15 +11,12 @@
 
 - name: 服务停止
   when: scripts_stop is defined and monit_conf.stat.isreg == false
-  notify: 
-    - 服务停止
+  notify: 服务停止
 
 - name: 服务启停
   when: scripts_start is defined and monit_conf.stat.isreg == false
-  notify:
-    - 服务启动
+  notify: 服务启动
 
 - name: monit重启服务
   when: monit_conf.stat.isreg == true
-  notify:
-    - monit重启服务
+  notify: monit重启服务
