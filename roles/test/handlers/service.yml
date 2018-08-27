@@ -15,6 +15,6 @@
   when: scripts_stop is defined and monitConf.stat.isreg == false
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_stop }}'"
 
-- name: 服务启停
+- name: 服务启动
   when: scripts_start is defined and monitConf.stat.isreg == false
   shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_start }}'"
