@@ -1,12 +1,4 @@
 ---
-- name: 获取monit配置
-  stat: path=/etc/monit.d/{{ app_name }}.conf
-  register: monitConf
-  notify: debug
-
-- name: debug
-  debug: var=monitConf.stat
-
 - name: monit重启服务
   when: monitConf.stat.isreg == true
   shell: "su - root -c 'monit restart {{ app_name }}'"

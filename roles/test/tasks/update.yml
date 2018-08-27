@@ -1,4 +1,11 @@
 ---
+- name: 获取monit配置
+  stat: path=/etc/monit.d/{{ app_name }}.conf
+  register: monitConf
+
+- name: debug
+  debug: var=monitConf.stat.isreg
+
 - name: 更新软连接
   file: src={{ app_src }}/{{ app_name }}/{{ tag_id }} dest={{ app_dir }}/{{ app_name }} group={{ app_user }} owner={{ app_user }} state=link force=yes
   tags: scripts
