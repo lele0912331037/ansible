@@ -3,6 +3,6 @@
   tasks:
   - name: test path
     shell: ls /etc/monit.d/nebulae.conf
-    #register: result
+    register: result
   - name: test debug
     debug: var=result.stdout
