@@ -5,4 +5,5 @@
     stat: path=/etc/monit.d/nebulae.conf 
     register: result
   - name: test debug
-    debug: var=result.stdout
+    #when: result.stat is isreg
+    debug: var=result.stat
