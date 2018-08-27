@@ -18,8 +18,6 @@
 
 - name: mv目录为tag名称
   when: tatpath.stat.isdir == true
-  #shell: mv -f {{ app_src }}/{{ app_name }}/{{ tag_id }} {{ app_src }}/{{ app_name }}/{{ tag_id }}_{{ build_id }}
-   #        && mv {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ tag_id }}
   shell:
     - mv -f {{ app_src }}/{{ app_name }}/{{ tag_id }} {{ app_src }}/{{ app_name }}/{{ tag_id }}_{{ build_id }}
     - mv {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ tag_id }}
