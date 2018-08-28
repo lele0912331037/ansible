@@ -33,3 +33,5 @@ ansible-playbook playbook/test.yml --extra-vars "host_ip=172.16.0.12 app_tar_dir
 	app_tarname=semantic-online_nebulae_3.42_3.50 tag_id=master app_name=nebulae scripts_start=start.sh \
 	scripts_stop=stop.sh scripts_path=/data/app/nebulae/services \
 	build_id=123 pid_name=nebulae_server.py src_conf=conf_test_txy"
+
+sudo salt "jpaws-xiaobao-resource01" cmd.run "ps -ef|grep php-fpm|grep master|grep -v grep|awk '{print \$2}'|xargs kill -USR2" runas='root'
