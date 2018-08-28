@@ -1,6 +1,21 @@
 ---
+- name: 获取monit配置
+  stat: path=/etc/monit.d/{{ app_name }}.conf
+  register: monitConf
+
+- name: debug
+  debug: var=monitConf.stat.isreg
+
 - name: 更新软连接
   file: src={{ app_src }}/{{ app_name }}/{{ tag_id }} dest={{ app_dir }}/{{ app_name }} group={{ app_user }} owner={{ app_user }} state=link force=yes
   tags: scripts
-  register: result.output
-- debug: var=result.stdout verbosity=0
+  notify: 
+    - monit重启服务
+    - 服务停止
+    - 服务启动
+
+# 更改配置文件软连接
+- name: 更新软连接
+  when: src_conf is defined
+  file: src={{ scripts_path }}/{{ src_conf }} dest={{ scripts_path }}/conf group={{ app_user }} owner={{ app_user }} state=link force=yes
+  tags: scripts

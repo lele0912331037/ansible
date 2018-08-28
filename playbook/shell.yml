@@ -1,0 +1,9 @@
+---
+- hosts: 172.16.0.12
+  tasks:
+  - name: test path
+    stat: path=/etc/monit.d/nebulae.conf 
+    register: result
+  - name: test debug
+    when: result.stat.isreg == true
+    debug: var=result.stat

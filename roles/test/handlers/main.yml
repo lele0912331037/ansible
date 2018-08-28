@@ -1,0 +1,7 @@
+---
+
+# 添加monit配置
+- include: monit.yml
+
+# 服务重启相关配置
+- include: service.yml

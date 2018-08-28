@@ -1,39 +1,51 @@
 ---
 # --- 检测服务 ---
 - name: 根据进程名称检查pid
+  when: pid_name is defined
   shell: "ps -ef|grep {{ pid_name }}|grep -v grep |awk '{if($3==1) print $2}'"
-  register: result
+  register: pidname
   tags: check
+  notify: 
+    - mkdir monit path
+    - update monit conf
 
 - name: 输出pid号
-  debug: var=result.stdout verbosity=0
+  when: pidname is defined
+  debug: var=pidname.stdout
 
 - name: 根据pid查端口，系统版本为centos6*的
-  when: result.stdout != None  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "6"
-  shell: "ss -lnp|grep {{ result.stdout }}|awk 'NR==1 {print $4}'|awk -F':' '{print $2}'"
-  register: result
+  when: pidname.stdout is defined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "6"
+  shell: "sleep 5 ; ss -lnp|grep '{{ pidname.stdout }}'|awk '{print $4}'"
+  register: c6port
   tags: check
 
-- name: 输出port号，系统版本为centos6*的
-  debug: var=result.stdout
+- name: 输出端口号，系统版本为centos6*的
+  when: c6port.stdout is defined
+  debug: var=c6port.stdout
 
 - name: 根据pid查端口，系统版本为centos7*的
-  when: result.stdout != None  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "7"
-  shell: "ss -lnp|grep {{ result.stdout }}|awk 'NR==1 {print $5}'|awk -F':' '{print $2}'"
-  register: result
+  when: pidname.stdout is defined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "7"
+  shell: "sleep 5 ; ss -lnp|grep {{ pidname.stdout }}|awk '{print $5}'"
+  register: c7port
   tags: check
 
-- name: 输出port号，系统版本为centos7*的
-  debug: var=result.stdout
+- name: 输出端口号，系统版本为centos7*的
+  when: c7port.stdout is defined
+  debug: var=c7port.stdout
 
 - name: 无pid时
-  when: result.stdout == None
+  when: pidname.stdout is undefined
   shell: echo "进程没有启动"
-  register: result
+  register: nopid
 
 - name: 无pid时输出
+<<<<<<< HEAD
 <<<<<<< HEAD
   debug: var=result.stdout
 =======
   debug: var=result.stdout
 >>>>>>> master
+=======
+  when: nopid.stdout is defined
+  debug: var=nopid.stdout
+>>>>>>> nlu

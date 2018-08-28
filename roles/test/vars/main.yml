@@ -10,11 +10,17 @@ app_src: /data/src_app
 app_upflie: /data/upfile
 
 # 服务启停
+<<<<<<< HEAD
 scripts_path: /data/app/{{ app_name }}
 scripts_start: None
 scripts_stop: None
+=======
+scripts_path: '{{ app_dir }}/{{ app_name }}'
+#scripts_start: None
+#scripts_stop: None
+>>>>>>> nlu
 scripts_service: service.sh
-app_type: None
+#app_type: None
 
 # tar包路径及名称
 app_tarname: name # tar包的名称，不带.tar.gz
@@ -23,6 +29,4 @@ tag_id: tag_name # tag名称
 build_id: BuildId
 
 # include 模板判断条件
-app_service: False
-app_check: False
 pid_name: zabbix_agentd.conf

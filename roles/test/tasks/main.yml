@@ -5,6 +5,7 @@
 # 上传文件
 # - include: upload.yml
 
+<<<<<<< HEAD
 # 更新软连接
 # - include: update.yml
 
@@ -12,7 +13,10 @@
 # - include: services.yml
 #  when: app_service
 
+=======
+# 更新软连接及服务重启
+- include: update.yml
+
+>>>>>>> nlu
 # 检测服务
 - include: check.yml
-  when: app_check
-# - include: check1.yml
