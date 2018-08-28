@@ -19,7 +19,7 @@
 
 - name: 服务启停，启动
   when: scripts_start is defined
-  become: True
+  become_method: su
   become_user: robot
   shell: "cd {{ scripts_path }} && sh {{ scripts_start }}"
 
