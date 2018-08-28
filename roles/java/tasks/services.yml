@@ -10,7 +10,8 @@
 
 - name: 服务启停，停止
   when: scripts_stop is defined
-  shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_stop }}'"
+  #shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_stop }}'"
+  shell: cd {{ scripts_path }} && sh {{ scripts_stop }} become=True become_user=robot
   ignore_errors: yes
 
 - name: 服务启停，启动
