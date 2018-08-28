@@ -39,13 +39,9 @@
   register: nopid
 
 - name: 无pid时输出
-<<<<<<< HEAD
-<<<<<<< HEAD
   debug: var=result.stdout
-=======
+
   debug: var=result.stdout
->>>>>>> master
-=======
   when: nopid.stdout is defined
   debug: var=nopid.stdout
->>>>>>> nlu
+
