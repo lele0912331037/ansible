@@ -4,6 +4,9 @@
   stat: path=/etc/monit.d/{{ app_name }}.conf
   register: monitConf
 
+- name: 获取monit配置
+  stat: path={{ scripts_path }}
+  register: servicepath
 - debug: var=monitConf.stat.isreg
 
 - name: 更新文件到服务器

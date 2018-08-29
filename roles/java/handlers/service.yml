@@ -16,7 +16,7 @@
   notify: monit status
 
 - name: 服务停止
-  when: scripts_stop is defined and monitConf.stat.exists == false
+  when: scripts_stop is defined and monitConf.stat.exists == false and servicepath.stat.exists == true
   become: True
   become_method: su
   become_user: robot
