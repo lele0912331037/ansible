@@ -1,13 +1,22 @@
 ---
 - name: monit重启服务
   when: monitConf.stat.isreg == true
-  shell: "su - root -c 'monit restart {{ app_name }}'"
+  become: True
+  become_method: su
+  become_user: robot
+  shell: "monit restart {{ app_name }}"
   notify: monit status
 
 - name: 服务停止
   when: scripts_stop is defined and monitConf.stat.exists == false
-  shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_stop }}'"
+  become: True
+  become_method: su
+  become_user: robot
+  shell: "cd {{ scripts_path }} && sh {{ scripts_stop }}"
 
 - name: 服务启动
   when: scripts_start is defined and monitConf.stat.exists == false
-  shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_start }}'"
+  become: True
+  become_method: su
+  become_user: robot
+  shell: "cd {{ scripts_path }} && sh {{ scripts_start }}"

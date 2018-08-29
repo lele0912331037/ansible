@@ -3,4 +3,10 @@
   file: src={{ app_src }}/{{ app_name }}/{{ tag_id }} dest={{ app_dir }}/{{ app_name }} group={{ app_user }} owner={{ app_user }} state=link force=yes
   tags: scripts
   register: result.output
+  notify:
+    - 服务启动
+
+- name: flush_handlers
+  meta: flush_handlers
+
 - debug: var=result.stdout verbosity=0
