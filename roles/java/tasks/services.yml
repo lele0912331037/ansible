@@ -2,15 +2,15 @@
 # --- 检测服务 ---
 - name: 服务启停
   when: app_type is defined
-  #shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_service }} {{ app_type }}'"
-  shell: cd {{ scripts_path }} && sh {{ scripts_service }} {{ app_type }} become=True become_user=robot
+  shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_service }} {{ app_type }}'"
   register: result
   tags: scripts
 - debug: var=result.stdout
 
 - name: 服务启停，停止
   when: scripts_stop is defined
-  #shell: "su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_stop }}'"
+  shell: "cd {{ scripts_path }} && sh {{ scripts_stop }}"
+  #shell: "ps -ef|grep {{ pid_name }}|awk '{print $2}'|xargs kill -9"
   #become: True
   #become_method: su
   #become_user: robot
@@ -19,6 +19,7 @@
 
 - name: 服务启停，启动
   when: scripts_start is defined
+  become: True
   become_method: su
   become_user: robot
   shell: "cd {{ scripts_path }} && sh {{ scripts_start }}"
