@@ -14,6 +14,7 @@
                copy=no group={{ app_user }} owner={{ app_user }}
   tags: upload
   notify:
+    - monit停止
     - 服务停止
 
 - name: flush_handlers

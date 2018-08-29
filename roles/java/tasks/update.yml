@@ -4,6 +4,7 @@
   tags: scripts
   register: result.output
   notify:
+    - monit停止
     - 服务启动
 
 - name: flush_handlers
