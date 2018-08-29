@@ -7,6 +7,10 @@
   unarchive: src={{ app_upflie }}/{{ app_tarname }}.zip dest={{ app_src }}/{{ app_name }}
                copy=no group={{ app_user }} owner={{ app_user }}
   tags: upload
+  notify:
+    - 服务停止
+
+- meta: flush_handlers
 
 - name: 判断是否有此tag目录
   shell: "[ -d {{ app_src }}/{{ app_name }}/{{ tag_id }} ] && echo 'True' || echo 'False'"
