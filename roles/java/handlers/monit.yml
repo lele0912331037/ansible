@@ -11,13 +11,20 @@
 - name: update monit conf
   template: src=monit.j2 dest=/etc/monit.d/{{ app_name }}.conf
   notify: reload monit
+
 - name: reload monit
-  shell: "su - root -c 'monit reload'"
+  become: True
+  become_method: su
+  become_user: robot
+  shell: "monit reload"
   notify: monit status
 
 # 检查服务状态
 - name: monit status
-  shell: " su - root -c 'monit status {{ app_name }}|grep status'"
+  become: True
+  become_method: su
+  become_user: robot
+  shell: "monit status {{ app_name }}|grep status"
   notify: 查看服务状态
   register: status
 
