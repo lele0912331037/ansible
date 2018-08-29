@@ -31,12 +31,3 @@
 - name: 输出端口号，系统版本为centos7*的
   when: c7port.stdout is defined
   debug: var=c7port.stdout
-
-- name: 无pid时
-  when: pidname.stdout is undefined
-  shell: echo "进程没有启动"
-  register: nopid
-
-- name: 无pid时输出
-  when: nopid.stdout is defined
-  debug: var=nopid.stdout

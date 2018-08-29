@@ -12,5 +12,3 @@
 
 - name: flush_handlers
   meta: flush_handlers
-
-- debug: var=result.stdout verbosity=0

@@ -1,21 +1,11 @@
 ---
 ## ------ 更新文件 ------ 
-- name: 获取monit配置
-  stat: path=/etc/monit.d/{{ app_name }}.conf
-  register: monitConf
-
-- name: 获取monit配置
-  stat: path={{ scripts_path }}
-  register: servicepath
-- debug: var=monitConf.stat.isreg
-
 - name: 更新文件到服务器
   copy: src={{ app_tar_dir }}/{{ app_tarname }}.zip dest={{ app_upflie }} mode=0755
 
 - name: 解压zip包
   unarchive: src={{ app_upflie }}/{{ app_tarname }}.zip dest={{ app_src }}/{{ app_name }}
                copy=no group={{ app_user }} owner={{ app_user }}
-  tags: upload
   notify:
     - monit停止
     - 服务停止

@@ -6,3 +6,12 @@
   - "{{ app_dir }}"
   - "{{ app_src }}/{{ app_name }}"
   - "{{ app_upflie }}"
+
+- name: 获取monit配置
+  stat: path=/etc/monit.d/{{ app_name }}.conf
+  register: monitConf
+
+- name: 获取service配置
+  stat: path={{ scripts_path }}
+  register: servicepath
+- debug: var=monitConf.stat.isreg
