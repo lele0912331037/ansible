@@ -10,7 +10,8 @@
   notify:
     - 服务停止
 
-- meta: flush_handlers
+- name: flush_handlers
+  meta: flush_handlers
 
 - name: 判断是否有此tag目录
   shell: "[ -d {{ app_src }}/{{ app_name }}/{{ tag_id }} ] && echo 'True' || echo 'False'"
