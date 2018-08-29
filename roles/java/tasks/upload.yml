@@ -1,5 +1,9 @@
 ---
 ## ------ 更新文件 ------ 
+- name: 获取monit配置
+  stat: path=/etc/monit.d/{{ app_name }}.conf
+  register: monitConf
+
 - name: 更新文件到服务器
   copy: src={{ app_tar_dir }}/{{ app_tarname }}.zip dest={{ app_upflie }} mode=0755
 
