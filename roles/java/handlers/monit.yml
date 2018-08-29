@@ -15,7 +15,7 @@
 - name: reload monit
   become: True
   become_method: su
-  become_user: robot
+  become_user: root
   shell: "monit reload"
   notify: monit status
 
@@ -23,7 +23,7 @@
 - name: monit status
   become: True
   become_method: su
-  become_user: robot
+  become_user: root
   shell: "monit status {{ app_name }}|grep status"
   notify: 查看服务状态
   register: status
