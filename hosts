@@ -54,3 +54,7 @@
 
 [jxq_nlu_test_pre]
 10.52.68.77 ansible_ssh_user=root
+
+[jxq_ovs]
+10.102.5.77 ansible_ssh_user=root
+10.102.5.74 ansible_ssh_user=root
