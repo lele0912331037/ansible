@@ -3,7 +3,7 @@
   when: monitConf.stat.isreg == true
   become: True
   become_method: su
-  become_user: robot
+  become_user: root
   shell: "monit stop {{ app_name }}"
   notify: monit status
 
@@ -11,7 +11,7 @@
   when: monitConf.stat.isreg == true
   become: True
   become_method: su
-  become_user: robot
+  become_user: root
   shell: "monit start {{ app_name }}"
   notify: monit status
 
