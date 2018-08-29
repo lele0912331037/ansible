@@ -5,8 +5,7 @@
   register: result.output
 
 - name: Time of last modification
-  stat: path={{ app_dir }}/{{ app_name }}
-  register: lasttime
+  shell: date +%s
   notify:
     - monit启动
     - 服务启动
