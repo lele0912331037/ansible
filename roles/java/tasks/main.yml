@@ -9,7 +9,7 @@
 - include: update.yml
 
 # 重启服务
-- include: services.yml
+#- include: services.yml
 
 # 检测服务
 - include: check.yml
