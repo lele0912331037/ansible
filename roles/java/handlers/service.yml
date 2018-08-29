@@ -1,6 +1,6 @@
 ---
 - name: monit停止
-  when: monitConf.stat.isreg == true
+  when: monitConf.stat.exists == true
   become: True
   become_method: su
   become_user: root
@@ -8,7 +8,7 @@
   notify: monit status
 
 - name: monit启动
-  when: monitConf.stat.isreg == true
+  when: monitConf.stat.exists == true
   become: True
   become_method: su
   become_user: root
