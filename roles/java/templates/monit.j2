@@ -1,0 +1,8 @@
+check process {{ app_name }} matching "{{ pid_name }}"
+	group {{ app_name }}
+{% if scripts_start %}
+	start program = "/usr/bin/su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_start }} &>>/tmp/{{ app_name }}.log'"
+{% endif %}
+{% if scripts_stop %}
+	stop program = "/usr/bin/su - {{ app_user }} -c 'cd {{ scripts_path }} && sh {{ scripts_stop }} &>>/tmp/{{ app_name }}.log'"
+{% endif %}
