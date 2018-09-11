@@ -1,0 +1,22 @@
+---
+
+
+- name: 更新软连接
+  file: src={{ app_src }}/{{ app_name }}/{{ tag_id }} dest={{ app_dir }}/{{ app_name }} group={{ app_group }} owner={{ app_user }} state=link force=yes
+  tags: scripts
+
+# 更改配置文件软连接
+- name: 更新配置文件软连接
+  when: src_conf is defined and dest_conf is defined
+  file: src={{ scripts_path }}/{{ src_conf }} dest={{ scripts_path }}/{{ dest_conf }} group={{ app_group }} owner={{ app_user }} state=link force=yes
+  tags: scripts
+
+- name: 启动服务
+  when: scripts_start is defined and scripts_stop is defined
+  shell: date +%s
+  notify: 
+    - monit启动
+    - 服务启动
+
+- name: flush_handlers
+  meta: flush_handlers

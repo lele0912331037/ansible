@@ -1,0 +1,34 @@
+---
+
+# 添加monit路径
+- name: 检查monit配置
+  when: app_name is defined
+  file: dest={{ item }} state=directory
+  with_items: 
+  - /etc/monit.d
+
+# 创建monit配置文件
+- name: update monit conf
+  template: src=monit.j2 dest=/etc/monit.d/{{ app_name }}.conf
+  notify: reload monit
+
+# 重新加载monit配置
+- name: reload monit
+  become: True
+  become_method: su
+  become_user: root
+  shell: "monit reload"
+  notify: monit status
+
+# 检查服务状态
+- name: monit status
+  become: True
+  become_method: su
+  become_user: root
+  shell: "monit status {{ app_name }}|grep status"
+  notify: 查看服务状态
+  register: status
+
+- name: 查看服务状态
+  debug: 
+    msg: '{{ status.stdout }}'

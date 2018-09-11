@@ -1,0 +1,24 @@
+---
+
+# 解压软件包
+
+- name: "安装{{ jdk_name }}"
+  unarchive:
+    src: "{{ jdk_tar_path }}/{{ jdk_tar_name }}"
+    dest: "{{ jdk_path }}"
+    creates: "{{ jdk_path }}/{{ jdk_name }}"
+    list_files: yes
+    remote_src: True
+    group: "{{ app_user }}"
+    owner: "{{ app_group }}"
+  register: result_jdkname
+
+- name: "软连到指定目录"
+  when: "result_jdkname.changed == true and result_jdkname.files[0] is defined"
+  file:
+    src: "{{ jdk_path }}/{{ result_jdkname.files[0].replace('/','') }}"
+    dest: "{{ jdk_path }}/{{ jdk_name }}"
+    state: "link"
+    force: "yes"
+    group: "{{ app_user }}"
+    owner: "{{ app_group }}"

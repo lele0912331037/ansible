@@ -1,0 +1,10 @@
+---
+
+# 下载软件包
+- include: Download.yml
+
+# 安装
+- include: JKD_Install.yml
+
+# 设置环境变量
+- include: Export.yml

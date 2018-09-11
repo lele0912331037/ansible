@@ -1,0 +1,35 @@
+---
+## ------ 更新文件 ------ 
+- name: 更新文件到服务器
+  copy: src={{ app_tar_dir }}/{{ app_tarname }}.{{ cut_type }} dest={{ app_upflie }} mode=0755
+
+- name: 解压tar包
+  unarchive: src={{ app_upflie }}/{{ app_tarname }}.{{ cut_type }} dest={{ app_src }}/{{ app_name }}
+               copy=no group={{ app_group }} owner={{ app_user }}
+
+- name: 停止服务
+  shell: date +%s
+  when: scripts_start is defined and scripts_stop is defined
+  notify:
+    - 检查old_pid
+    - 检查monit配置
+    - update monit conf
+    - monit停止
+    - 服务停止
+  ignore_errors: True
+
+- name: flush_handlers
+  meta: flush_handlers
+
+- name: 获取tag目录
+  stat: path={{ app_src }}/{{ app_name }}/{{ tag_id }}
+  register: tarpath
+
+- name: 重命名为tag名称
+  when: tarpath.stat.exists == false
+  shell: mv -f {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ tag_id }}
+
+- name: 重命名为tag名称，并重命名原tag为tag_buildID
+  when: tarpath.stat.exists == true
+  shell: mv -f {{ app_src }}/{{ app_name }}/{{ tag_id }} {{ app_src }}/{{ app_name }}/{{ tag_id }}_{{ build_id }}
+           && mv {{ app_src }}/{{ app_name }}/{{ app_tarname }} {{ app_src }}/{{ app_name }}/{{ tag_id }}

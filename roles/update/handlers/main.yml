@@ -1,0 +1,10 @@
+---
+
+# 添加monit配置
+- include: monit.yml
+
+# 检查服务状态
+- include: check.yml
+
+# 服务重启相关配置
+- include: service.yml

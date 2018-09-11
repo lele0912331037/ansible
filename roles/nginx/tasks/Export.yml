@@ -1,0 +1,45 @@
+---
+
+# 设置环境变量
+
+- name: 获取路径
+  stat: "path='{{ app_path }}/{{ conda_name }}'"
+  register: get_path
+
+# python环境创建
+- name: "创建 {{ app_name }} 环境"
+  when: get_path.stat.exists == true and app_name != 'python3.6'
+  shell: "{{ app_path }}/{{ conda_name }}/bin/conda create -n {{ app_name }} python={{ app_version }}  -y"
+  register: "create_info"
+  ignore_errors: True
+
+- debug:
+    msg: "{{ create_info.changed}} {{ app_name }}"
+
+# 添加python3.6到系统环境变量
+- name: "添加python3.6环境变量"
+  when: get_path.stat.exists == true and app_name == 'python3.6'
+  file:
+    src: "{{ app_path }}/{{ conda_name }}/bin/python"
+    dest: "/usr/local/bin/{{ app_name }}"
+    state: "link"
+    force: "yes"
+  notify: "获取版本"
+
+# 添加python2.7到系统环境变量
+- name: "添加python2.7环境变量"
+  when:  create_info.changed and app_name == 'python2.7'
+  file:
+    src: "{{ app_path }}/{{ conda_name }}/envs/{{ app_name }}/bin/python"
+    dest: "/usr/local/bin/{{ app_name }}"
+    state: "link"
+    force: "yes"
+  notify: "获取版本"
+
+# 输出其他版本的环境变量信息
+- name: "打印{{ app_name }} 环境变量"
+  when: create_info.changed and app_name != 'python3.6' and app_name != 'python2.7'
+  shell: "date +%s"
+  notify: 输出环境变量
+
+

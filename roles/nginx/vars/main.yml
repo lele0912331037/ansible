@@ -1,0 +1,50 @@
+# 安装包源路径
+app_user: root
+app_group: root
+
+repos_infos:
+  - {
+      source_ip: "10.100.38.116",
+      sourc_port: "8080",
+    }
+source_url: "http://{{ repos_infos[0].source_ip }}:{{ repos_infos[0].sourc_port }}/files"
+
+
+# jdk信息
+app_version: "{{ version|default('1.12') }}" # 安装nginx版本：默认1.12
+app_name: "nginx"
+app_compile_name: "nginx_{{ app_version }}"
+app_path: "/usr/local"
+app_src_path: "/data/upfile"
+app_src_name: "{{ name|default('nginx-1.12.2.tar.gz') }}"
+public_path: "false"
+
+relys:
+  - { name: "gcc" }
+  - { name: "g++" }
+  - { name: "gcc-c++" }
+  - { name: "openssl-devel" }
+
+pkgs:
+  - { pcre: "pcre-8.12" }
+  - { zlib: "zlib-1.2.11" }
+  - { luajit: "LuaJIT-2.0.4" }
+  - { devel_kit: "v0.3.0" }
+  - { lua_module: "v0.10.8" }
+
+pkgs_dict:
+  - {
+      pcre: { name: "pcre-8.12", tar_name: "pcre-8.12.tar.gz"},
+      zlib: { name: "zlib-1.2.11", tar_name: "zlib-1.2.11.tar.gz"},
+      luajit: { name: "LuaJIT-2.0.4", tar_name: "LuaJIT-2.0.4.tar.gz"},
+      devel_kit: { name: "v0.3.0", tar_name: "v0.3.0.tar.gz"},
+      lua_module: { name: "v0.10.8", tar_name: "v0.10.8.tar.gz"}
+    }
+
+lua_prefix: "/usr/local/luajit"
+lua_envs:
+  - {var: "LUAJIT_LIB={{ lua_prefix }}/lib"}
+  - {var: "LUAJIT_INC={{ lua_prefix }}/include/luajit-2.0"}
+
+compile_infos:
+  - {compile_cmd: "./configure --prefix={{ app_path }}/{{ app_name }} --pid-path={{ app_path }}/{{ app_name }}/status/nginx.pid --with-stream --with-http_ssl_module --with-http_v2_module --without-http_uwsgi_module --with-pcre=../pcre-8.12 --with-zlib=../zlib-1.2.11 --add-module=../lua-nginx-module --add-module=../ngx_devel_kit-0.3.0 && make -j8 &&  make install"}

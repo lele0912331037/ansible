@@ -1,0 +1,19 @@
+# 安装包源路径
+app_user: root
+app_group: root
+
+repos_infos:
+  - {
+      source_ip: "10.100.38.116",
+      sourc_port: "8080",
+    }
+source_url: "http://{{ repos_infos[0].source_ip }}:{{ repos_infos[0].sourc_port }}/files"
+conda_name: "anaconda3"
+conda_tar_name: "{{ conda_name }}.tar.gz"
+# jdk信息
+app_version: "{{ version|default('2.7') }}" # 安装python版本：默认3.6
+app_name: "python{{ app_version }}"
+app_path: "/usr/local"
+app_tar_path: "/tmp"
+app_tar_name: "{{ conda_tar_name }}"
+public_path: "false"

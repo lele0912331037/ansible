@@ -1,0 +1,24 @@
+# 安装包源路径
+app_user: root
+app_group: root
+
+repos_infos:
+  - {
+      source_ip: "10.100.38.116",
+      sourc_port: "8080",
+    }
+source_url: "http://{{ repos_infos[0].source_ip }}:{{ repos_infos[0].sourc_port }}/files"
+
+# jdk信息
+jdk_version: "{{ version|default('1.8') }}" # 安装jdk版本：1.7 or 1.8
+jdk_name: "jdk{{ jdk_version|replace('.','_')}}"
+jdk_path: "/usr/local"
+jdk_tar_path: "/tmp"
+jdk_tar_name: "{{ jdk_name }}.tar.gz"
+
+# 环境变量
+jdk_envs:
+  - {
+      var_dir: "JAVA_HOME='{{ jdk_path }}/{{ jdk_name }}'",
+      var_path: "PATH='$JAVA_HOME/bin:$PATH'"
+    }

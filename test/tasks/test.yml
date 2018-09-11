@@ -1,0 +1,5 @@
+---
+
+- name: test
+  shell: "grep {{ item.var }} /usr/local/test.txt || echo export {{ item.var }} >> /usr/local/test.txt"
+  with_items: "{{ test_envs }}"

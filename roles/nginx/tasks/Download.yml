@@ -1,0 +1,32 @@
+---
+
+# 下载软件包
+
+- debug: 
+    msg: "{{ item.key }} {{item.value.name}}"
+  with_dict: "{{ pkgs }}"
+# - name: "创建安装路径"
+#   file:
+#     path: "{{ item }}"
+#     state: directory
+#     mode: 0755
+#   with_items:
+#     - "{{ app_src_path }}/{{ app_compile_name }}"
+#     - "{{ app_path }}"
+
+# # 下载nginx安装包
+# - name: "下载 {{ app_name }} 软件包"
+#   when: app_version is defined
+#   get_url:
+#     url: "{{ source_url }}/nginx/{{ app_src_name }}"
+#     dest: "{{ app_src_path }}/{{ app_compile_name }}/{{ app_src_name }}"
+#   register: result_download
+
+# # 下载依赖包
+# - name: "download {{ app_name }}依赖包"
+#   when: app_version is defined
+#   get_url:
+#     url: "{{ source_url }}/nginx/{{ item.value.tar_name }}"
+#     dest: "{{ app_src_path }}/{{ app_compile_name }}/{{ item.value.tar_name }}"
+#   with_dict: 
+#     - "{{ pkgs }}"

@@ -1,0 +1,13 @@
+---
+
+# 解压软件包
+
+- name: "解压{{ app_name }}"
+  unarchive:
+    src: "{{ app_tar_path }}/{{ conda_tar_name }}"
+    dest: "{{ app_path }}"
+    creates: "{{ app_path }}/{{ conda_name }}"
+    list_files: yes
+    remote_src: True
+    mode: "777"
+  register: result_name

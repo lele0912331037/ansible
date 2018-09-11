@@ -1,0 +1,36 @@
+---
+
+# 设置环境变量
+
+- name: 获取路径
+  stat: "path='{{ jdk_path }}/{{ jdk_name }}'"
+  register: monitConf
+
+- name: "添加{{ jdk_name }} 路径 环境变量"
+  when: monitConf.stat.exists == true
+  shell: "grep {{ item.var_dir }} /etc/profile || echo {{ item.var_dir }} >> /etc/profile"
+  with_items: "{{ jdk_envs }}"
+  args: 
+    executable: /bin/bash
+  register: value_dir
+- debug: 
+    msg: "{{ value_dir.results[0].rc }}"
+
+- name: "添加{{ jdk_name }} PATH 环境变量"
+  when: "'value_dir.results[0].rc'|int  == 0"
+  shell: "echo {{ item.var_path }} >> /etc/profile"
+  with_items: "{{ jdk_envs }}"
+  args: 
+    executable: /bin/bash
+  register: value_path
+- debug: 
+    msg: "{{ value_path.results[0].rc }}"
+
+- name: "查看 {{ jdk_name }} 信息"
+  when: "'value_path.results[0].rc'|int  == 0"
+  shell: "source /etc/profile && java -version"
+  register: jdk_Version
+
+- name: "输出 {{ jdk_name }} 信息"
+  debug:
+    msg: "{{ jdk_Version.stderr_lines }}"

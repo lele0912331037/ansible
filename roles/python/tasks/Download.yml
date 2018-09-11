@@ -1,0 +1,9 @@
+---
+
+# 下载软件包
+
+- name: "下载 {{ app_name }} 软件包"
+  when: app_version is defined
+  get_url:
+    url: "{{ source_url }}/anaconda/{{ conda_tar_name }}"
+    dest: "{{ app_tar_path }}/{{ app_tar_name }}"

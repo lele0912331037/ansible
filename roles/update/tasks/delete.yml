@@ -1,0 +1,13 @@
+# 删除历史版本，保留5份
+
+- name: 统计历史版本数
+  shell: "ls {{ app_src }}/{{ app_name }}|wc -l"
+  register: count_NO
+
+- name: 删除历史版本
+  when: count_NO.stdout|int > 10
+  shell: "find {{ app_src }}/{{ app_name }}/* -maxdepth 0 -type d|xargs ls -tdr|head -{{ count_NO.stdout|int - 10 }}|xargs rm -rf"
+
+- name: 打印日志
+  debug: 
+    msg: "历史版本：{{ count_NO.stdout }} ，删除历史版本：{{ count_NO.stdout|int - 10 }}"

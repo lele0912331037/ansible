@@ -1,0 +1,63 @@
+---
+
+# 解压软件包
+
+# 解压nginx安装包
+- name: "解压{{ app_name }}"
+  unarchive:
+    src: "{{ app_src_path }}/{{ app_src_name }}"
+    dest: "{{ app_src_path }}/{{ app_compile_name }}"
+    creates: "{{ app_src_path }}/{{ app_compile_name }}/{{ app_name }}"
+    list_files: yes
+    remote_src: True
+    mode: "755"
+  register: result_name
+
+- name: "软连到{{ app_name }}目录"
+  when: "result_name.changed == true and result_name.files[0] is defined"
+  file:
+    src: "{{ app_src_path }}/{{ app_compile_name }}/{{ result_name.files[0].replace('/','') }}"
+    dest: "{{ app_src_path }}/{{ app_compile_name }}/{{ app_name }}"
+    state: "link"
+    force: "yes"
+    group: "{{ app_user }}"
+    owner: "{{ app_group }}"
+
+# 解压依赖包
+- name: "解压{{ item.key }}"
+  unarchive:
+    src: "{{ app_src_path }}/{{ app_compile_name }}/{{ item.key.value }}.tar.gz"
+    dest: "{{ app_src_path }}/{{ app_compile_name }}"
+    list_files: yes
+    remote_src: True
+    mode: "755"
+  with_dict: 
+    - "{{ pkgs }}"
+  register: result_pkgsname
+
+# 安装yum依赖
+- name: "安装{{ app_name }} yum依赖{{ item.name }}"
+  yum:
+    name: "{{ item.name }}"
+    state: present
+  with_items:
+    - "{{ relys }}"
+
+# 编译lua模块
+- name: "编译lua模块"
+  shell: "make install PREFIX={{ lua_prefix }}"
+  args:
+    chdir: "{{ app_src_path }}/{{ app_compile_name }}/{{  item.luajit.value }}"
+    creates: "{{ app_src_path }}/{{ app_compile_name }}/{{  item.luajit.value }}"
+  with_dict:
+    - "{{ pkgs }}"
+
+# 编译安装nginx
+- name: "编译安装{{ app_name }}"
+  shell: " export {{ item[0].var }} && {{ item[1].compile_cmd }}"
+  args:
+    chdir: "{{ app_src_path }}/{{ app_compile_name }}/{{ app_name }}"
+    creates: "{{ app_src_path }}/{{ app_compile_name }}/{{ app_name }}"
+  with_nested:
+    - "{{ lua_envs }}"
+    - "{{ compile_infos }}"

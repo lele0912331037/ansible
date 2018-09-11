@@ -1,0 +1,11 @@
+source_ip: "10.100.38.116"
+sourc_port: "8080"
+
+
+jdk_version: "{{ jdk_version | default('1.8') }}"
+jdk_name: "jdk{{ jdk_version }}"
+jdk_path:/usr/local
+
+jdk_envs:
+  - {var: "JAVA_HOME={{ jdk_path }}/{{ jdk_name }}" }
+  - {var: "PATH=$JAVA_HOME/bin:$PATH" }

@@ -1,0 +1,36 @@
+---
+# --- 检测服务 ---
+- name: 检查old_pid
+  when: pid_name is defined
+  shell: "ps -ef|grep {{ pid_name }}|grep -v grep |awk '{if($3==1) print $2}'"
+  register: oldpidname
+
+- name: 检查pid
+  when: pid_name is defined
+  shell: "ps -ef|grep {{ pid_name }}|grep -v grep |awk '{if($3==1) print $2}'"
+  register: pidname
+  notify: 
+    - 根据pid查端口 centos6
+    - 根据pid查端口 centos7
+
+- name: 根据pid查端口 centos6
+  when: pidname.stdout is defined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "6"
+  shell: "sleep 10 ; ss -lnp|grep '{{ pidname.stdout }}'|awk '{print $4}'"
+  register: c6port
+  notify:
+    - 输出服务信息centos6
+
+- name: 根据pid查端口 centos7
+  when: pidname.stdout is defined  and ansible_distribution == 'CentOS' and ansible_distribution_major_version == "7"
+  shell: "sleep 10 ; ss -lnp|grep {{ pidname.stdout }}|awk '{print $5}'"
+  register: c7port
+  notify:
+    - 输出服务信息centos7
+
+- name: 输出服务信息centos6
+  debug: 
+    msg: "old_pid: {{ oldpidname.stdout }} new_pid: {{ pidname.stdout }},端口号：{{ c6port.stdout }}"
+
+- name: 输出服务信息centos7
+  debug: 
+    msg: "old_pid: {{ oldpidname.stdout }} new_pid: {{ pidname.stdout }},端口号：{{ c7port.stdout }}"

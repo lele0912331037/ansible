@@ -22,6 +22,14 @@
 172.31.19.125
 172.31.28.123
 
+[aws_h5]
+172.31.29.120
+172.31.30.217
+
+[aws_nlp]
+172.31.28.126
+172.31.25.130
+
 # aws跳板机
 [jump]
 172.31.28.143
@@ -38,6 +46,8 @@
 [tx_nlu_bxm]
 172.16.0.130 ansible_ssh_user=root
 172.16.0.116 ansible_ssh_user=root
+[tx_jump]
+172.16.0.15 ansible_ssh_user=root
 
 [tx_ovs]
 172.16.31.5 ansible_ssh_user=root

@@ -1,0 +1,12 @@
+---
+# 创建相关目录
+- include: create.yml
+
+# 上传文件
+- include: upload.yml
+
+# 更新软连接及服务重启
+- include: update.yml
+
+# 删除历史更新，保留5份
+- include: delete.yml

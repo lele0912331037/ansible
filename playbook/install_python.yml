@@ -1,0 +1,4 @@
+---
+- hosts: "{{ host_ip|default('172.16.0.15') }}"
+  roles:
+  - python

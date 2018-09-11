@@ -1,0 +1,35 @@
+---
+- name: monit停止
+  when: monitConf.stat.exists == true
+  become: True
+  become_method: su
+  become_user: root
+  shell: "monit stop {{ app_name }}"
+  ignore_errors: True
+
+- name: monit启动
+  when: monitConf.stat.exists == true
+  become: True
+  become_method: su
+  become_user: root
+  shell: "monit start {{ app_name }}"
+  notify:
+    - monit status
+    - 检查pid
+
+- name: 服务停止
+  when: scripts_stop is defined and monitConf.stat.exists == false and servicepath.stat.exists == true
+  become: True
+  become_method: su
+  become_user: robot
+  shell: "cd {{ scripts_path }} && sh {{ scripts_stop }}"
+  ignore_errors: True
+
+- name: 服务启动
+  when: scripts_start is defined and monitConf.stat.exists == false and servicepath.stat.exists == true
+  become: True
+  become_method: su
+  become_user: robot
+  shell: "cd {{ scripts_path }} && sh {{ scripts_start }}"
+  notify:
+    - 检查pid

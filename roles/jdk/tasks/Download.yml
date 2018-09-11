@@ -1,0 +1,15 @@
+---
+
+# 下载软件包
+
+- name: "下载 {{ jdk_name }} 软件包"
+  when: jdk_version == '1.8'
+  get_url:
+    url: "{{ source_url }}/jdk/jdk-8u181-linux-x64.tar.gz"
+    dest: "/tmp/{{ jdk_tar_name }}"
+
+- name: "下载 {{ jdk_name }} 软件包"
+  when: jdk_version == '1.7'
+  get_url:
+    url: "{{ source_url }}/jdk/jdk-7u80-linux-x64.tar.gz"
+    dest: "/tmp/{{ jdk_tar_name }}"
